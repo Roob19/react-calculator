@@ -7,7 +7,7 @@ function App() {
       currentNumber: '0',
       operator: '',
       secondNumber: '',
-      trackerFirst: true,
+      a: true,
     }
   )
 
@@ -22,26 +22,35 @@ function App() {
 
   const handleClick = (e) => {
     const entry = e.target.value;
-    if (Number.isInteger(parseInt(entry)) || entry === '.') {
-      if(calc.operator == ''){
-        setCalc({...calc,trackerFirst:true, currentNumber: calc.currentNumber === '0' ? entry : calc.currentNumber + entry })
+
+    if (entry === '.') {
+      if (calc.a) {
+        setCalc({...calc,  currentNumber: calc.currentNumber.includes(entry) ? calc.currentNumber : calc.currentNumber + entry})
       } else {
-        setCalc({...calc,trackerFirst: false, secondNumber: calc.secondNumber + entry })
+        setCalc({...calc, secondNumber: calc.secondNumber.includes(entry) ? calc.secondNumber : calc.secondNumber + entry })
+      }
+    }
+
+    if (Number.isInteger(parseInt(entry))) {
+      if(calc.operator === ''){
+        setCalc({...calc,a:true, currentNumber: calc.currentNumber === '0' ? entry : calc.currentNumber + entry })
+      } else {
+        setCalc({...calc,a:false, secondNumber: calc.secondNumber + entry })
       } 
     }
 
     if (OPERATIONS.hasOwnProperty(entry)){
       if (entry === '%'){
-        setCalc({...calc,trackerFirst:true,  currentNumber: OPERATIONS[entry](parseFloat(calc.currentNumber)).toString()})
+        setCalc({...calc,a:true, currentNumber: OPERATIONS[entry](parseFloat(calc.currentNumber)).toString()})
       } else if(entry === '±'){
-        setCalc({...calc,trackerFirst:true,  currentNumber: OPERATIONS[entry](parseFloat(calc.currentNumber)).toString()})
+        setCalc({...calc,a:true, currentNumber: OPERATIONS[entry](parseFloat(calc.currentNumber)).toString()})
       } else {
-        setCalc({...calc,trackerFirst:true, operator: entry})
+        setCalc({...calc, a:true, secondNumber:'', operator: entry})
       }
     }
     
     if (entry === '='){
-      setCalc({...calc,trackerFirst:true,  currentNumber: OPERATIONS[calc.operator](parseFloat(calc.currentNumber), parseFloat(calc.secondNumber)).toString()})
+      setCalc({...calc, a:true, currentNumber: OPERATIONS[calc.operator](parseFloat(calc.currentNumber), parseFloat(calc.secondNumber)).toString()})
     }
 
     if(entry === 'all-clear'){
@@ -49,7 +58,7 @@ function App() {
         currentNumber: '0',
         operator: '',
         secondNumber: '',
-        trackerFirst:true,
+        a: true,
       })
     }
   }
@@ -62,21 +71,21 @@ function App() {
           <div className='top-button top-yellow'><span>-</span></div>
           <div className='top-button top-green'><span>+</span></div>
         </div>
-          <input type="text" className="calculator-screen key-text" value={calc.trackerFirst?calc.currentNumber:calc.secondNumber} disabled /> 
+          <input type="text" className="calculator-screen key-text" value={calc.a?calc.currentNumber:calc.secondNumber} disabled /> 
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="all-clear">{calc.currentNumber !== '0'?'C':'AC'}</button>
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="±">±</button>
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="%">%</button>
           <button onClick={(e) => handleClick(e)} type="button" className="operator key-text" value="/">&divide;</button>
-          <button onClick={(e) => handleClick(e)} type="button"className='key-text' value="7">7</button>
-          <button onClick={(e) => handleClick(e)} type="button" className='key-text'value="8">8</button>
-          <button onClick={(e) => handleClick(e)} type="button"className='key-text' value="9">9</button>
+          <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="7">7</button>
+          <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="8">8</button>
+          <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="9">9</button>
           <button onClick={(e) => handleClick(e)} type="button" className="operator key-text" value="*">&times;</button>
-          <button onClick={(e) => handleClick(e)} type="button"className='key-text' value="4">4</button>
-          <button onClick={(e) => handleClick(e)} type="button" className='key-text'value="5">5</button>
-          <button onClick={(e) => handleClick(e)} type="button"className='key-text' value="6">6</button>
+          <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="4">4</button>
+          <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="5">5</button>
+          <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="6">6</button>
           <button onClick={(e) => handleClick(e)} type="button" className="operator key-text" value="-">-</button>
           <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="1">1</button>
-          <button onClick={(e) => handleClick(e)} type="button" className='key-text'value="2">2</button>
+          <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="2">2</button>
           <button onClick={(e) => handleClick(e)} type="button" className='key-text' value="3">3</button>
           <button onClick={(e) => handleClick(e)} type="button" className="operator key-text" value="+">+</button>
           <button onClick={(e) => handleClick(e)} type="button" className='button-0 key-text' value="0">0</button>

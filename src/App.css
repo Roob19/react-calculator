@@ -100,12 +100,14 @@ button:active {
 }
 
 .top-button{
+  cursor:default;
   line-height: 80%;
   width: 15px;
   height: 15px;
   background-color: rgb(255, 95, 87);
   border-radius: 50%;
 }
+
 span{
   display:none;
 }
@@ -121,13 +123,4 @@ span{
 
 .top-green{
   background-color: rgb(40, 200, 64);
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
