@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <p step="0.000001">{3.123456789.toFixed(6)}</p>
       </header>
     </div>
   );
