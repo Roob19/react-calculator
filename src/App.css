@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  width:400px;
+  margin:0 auto;
+  margin-top:150px;
 }
 
 .App-logo {
@@ -26,6 +29,98 @@
 
 .App-link {
   color: #61dafb;
+}
+
+button{
+  height:90px;
+  background-color:rgb(142, 142, 142);
+  font-size:40px;
+}
+
+button:active { 
+  background-color:rgb(185, 185, 185);
+}
+
+.op-dark{ 
+  background-color: rgb(72, 72, 72);
+}
+
+.op-dark:active { 
+  background-color:rgb(132, 132, 132);
+}
+
+.key-text{ 
+  color: white;
+}
+
+.operator{
+  background-color: rgb(255, 182, 47);
+}
+
+.operator:active { 
+  background-color:rgb(199, 143, 40);;
+}
+
+.calculator-screen{ 
+  grid-column-start: 1;
+  grid-column-end:5;
+  height:100px;
+  text-align:right;
+  font-size: 76px;
+  background-color: rgb(40, 40, 40);
+  border-radius: 15px 15px 0 0;
+  padding-right: 27px;
+  padding-top: 20px;
+}
+
+.calculator-keys{ 
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-radius: 17px;
+  -webkit-box-shadow: 0px 0px 28px -8px #000000; 
+  box-shadow: 0px 0px 28px -8px #000000;
+}
+
+.button-0{ 
+  grid-column-start: 1;
+  grid-column-end:3;
+  border-radius: 0 0 0 15px;
+}
+
+.operator-eq{
+  border-radius: 0 0 15px 0;
+}
+
+.top-button-wrapper{
+  margin: 13px 0 0 17px;
+  position: absolute;
+  width:67px;
+  display:flex;
+  justify-content: space-between;
+}
+
+.top-button{
+  line-height: 80%;
+  width: 15px;
+  height: 15px;
+  background-color: rgb(255, 95, 87);
+  border-radius: 50%;
+}
+span{
+  display:none;
+}
+
+.top-button-wrapper:hover span{ 
+  display: inline;
+}
+
+
+.top-yellow{
+  background-color: rgb(254, 188, 45);
+}
+
+.top-green{
+  background-color: rgb(40, 200, 64);
 }
 
 @keyframes App-logo-spin {
