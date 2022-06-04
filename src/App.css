@@ -33,20 +33,22 @@
 
 button{
   height:90px;
-  background-color:rgb(142, 142, 142);
+  background-color:rgb(100, 100, 100);
   font-size:40px;
+  border-color: black;
+  border-width: 1px;
 }
 
 button:active { 
-  background-color:rgb(185, 185, 185);
+  background-color:rgb(165, 165, 165);
 }
 
 .op-dark{ 
-  background-color: rgb(72, 72, 72);
+  background-color: rgb(67, 66, 64);
 }
 
 .op-dark:active { 
-  background-color:rgb(132, 132, 132);
+  background-color:rgb(110, 110, 110);
 }
 
 .key-text{ 
@@ -54,7 +56,7 @@ button:active {
 }
 
 .operator{
-  background-color: rgb(255, 182, 47);
+  background-color: rgb(238, 158, 40);
 }
 
 .operator:active { 
@@ -67,7 +69,7 @@ button:active {
   height:100px;
   text-align:right;
   font-size: 76px;
-  background-color: rgb(40, 40, 40);
+  background-color: rgb(42, 42, 42);
   border-radius: 15px 15px 0 0;
   padding-right: 27px;
   padding-top: 20px;
@@ -110,10 +112,12 @@ button:active {
 
 .top-buttons-span{
   display:none;
+  color: rgba(0, 0, 0, 0.5)
 }
 
 .top-button-wrapper:hover .top-buttons-span{ 
   display: inline;
+  
 }
 
 .top-yellow{
