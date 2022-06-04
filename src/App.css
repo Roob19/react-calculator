@@ -108,14 +108,13 @@ button:active {
   border-radius: 50%;
 }
 
-span{
+.top-buttons-span{
   display:none;
 }
 
-.top-button-wrapper:hover span{ 
+.top-button-wrapper:hover .top-buttons-span{ 
   display: inline;
 }
-
 
 .top-yellow{
   background-color: rgb(254, 188, 45);

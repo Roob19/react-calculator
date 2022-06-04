@@ -24,7 +24,9 @@ function App() {
     const entry = e.target.value;
 
     if (entry === '.') {
-      if (calc.a) {
+      if(calc.operator){
+        setCalc({currentNumber: '0.', operator: '', secondNumber: '', a: true})
+      } else if (calc.a) {
         setCalc({...calc,  currentNumber: calc.currentNumber.includes(entry) ? calc.currentNumber : calc.currentNumber + entry})
       } else {
         setCalc({...calc, secondNumber: calc.secondNumber.includes(entry) ? calc.secondNumber : calc.secondNumber + entry })
@@ -45,12 +47,19 @@ function App() {
       } else if(entry === '±'){
         setCalc({...calc,a:true, currentNumber: OPERATIONS[entry](parseFloat(calc.currentNumber)).toString()})
       } else {
-        setCalc({...calc, a:true, secondNumber:'', operator: entry})
+        console.log(calc)
+        if(calc.currentNumber && calc.operator && calc.secondNumber){
+          setCalc({...calc, a:true, secondNumber:'',operator: entry, currentNumber: OPERATIONS[calc.operator](parseFloat(calc.currentNumber), parseFloat(calc.secondNumber)).toString()})
+        } else {
+          setCalc({...calc, a:true, secondNumber:'', operator: entry})
+        }
       }
     }
     
     if (entry === '='){
-      setCalc({...calc, a:true, currentNumber: OPERATIONS[calc.operator](parseFloat(calc.currentNumber), parseFloat(calc.secondNumber)).toString()})
+      if(calc.operator){
+        setCalc({...calc, a:true, currentNumber: OPERATIONS[calc.operator](parseFloat(calc.currentNumber), parseFloat(calc.secondNumber)).toString()})
+      }
     }
 
     if(entry === 'all-clear'){
@@ -67,10 +76,10 @@ function App() {
     <div className="App">
        <div className="calculator-keys">
          <div className='top-button-wrapper'>
-          <div className='top-button top-red'><span>x</span></div>
-          <div className='top-button top-yellow'><span>-</span></div>
-          <div className='top-button top-green'><span>+</span></div>
-        </div>
+          <div className='top-button top-red'><span className='top-buttons-span'>x</span></div>
+          <div className='top-button top-yellow'><span className='top-buttons-span'>-</span></div>
+          <div className='top-button top-green'><span className='top-buttons-span'>+</span></div>
+        </div>        
           <input type="text" className="calculator-screen key-text" value={calc.a?calc.currentNumber:calc.secondNumber} disabled /> 
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="all-clear">{calc.currentNumber !== '0'?'C':'AC'}</button>
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="±">±</button>
