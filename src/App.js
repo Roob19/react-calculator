@@ -20,8 +20,25 @@ function App() {
     '±': (a) => a * (-1),
   };
 
+
+  const resetState = () => {
+    setCalc(
+      {
+        currentNumber: '0',
+        operator: '',
+        secondNumber: '',
+        a: true,
+      }
+    )
+  }
+
   const handleClick = (e) => {
     const entry = e.target.value;
+
+    if (calc.currentNumber === 'Out Of Range') {
+      resetState();
+      return;
+    }
 
     if (entry === '.') {
       if(calc.operator){
@@ -62,7 +79,13 @@ function App() {
     }
 
     if(entry === 'all-clear'){
-      setCalc({currentNumber: '0', operator: '', secondNumber: '', a: true})
+      resetState()
+    }
+
+    console.log(calc.currentNumber.length)
+   
+    if (calc.currentNumber.length > 11 || calc.secondNumber.length > 11) {
+      setCalc({...calc, currentNumber: 'Out Of Range', a:true})
     }
   }
 
@@ -74,7 +97,7 @@ function App() {
           <div className='top-button top-yellow'><span className='top-buttons-span'><strong>-</strong></span></div>
           <div className='top-button top-green'><span className='top-buttons-span'><strong>+</strong></span></div>
         </div>        
-          <input type="text" className="calculator-screen key-text" value={calc.a?calc.currentNumber:calc.secondNumber} disabled /> 
+          <input type="text" className="calculator-screen key-text" style={calc.currentNumber.length>8?{fontSize:48}:{fontSize:76}} value={calc.a?calc.currentNumber:calc.secondNumber} disabled /> 
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="all-clear">{calc.currentNumber !== '0'?'C':'AC'}</button>
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="±">±</button>
           <button onClick={(e) => handleClick(e)} type="button" className="op-dark key-text" value="%">%</button>
